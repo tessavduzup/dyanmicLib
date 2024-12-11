@@ -13,6 +13,7 @@ int main()
         return 1;
     }
 
+
 	typedef void (*sort) (int*, int);
 	sort Sort;
 	Sort = (sort)GetProcAddress(load, "sort");
@@ -25,18 +26,22 @@ int main()
     average Average;
     Average = (average)GetProcAddress(load, "average");
 
+    typedef void (*displayArray) (int*, int);
+    displayArray DisplayArray;
+    DisplayArray = (displayArray)GetProcAddress(load, "displayArray");
+
 	int arr[] = { 5, 3, 8, 1, 4 };
 	int size = sizeof(arr) / sizeof(arr[0]);
 	
     cout << "Исходный массив: ";
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; ++i) {
         cout << arr[i] << " ";
     }
     cout << endl;
 
-    Sort(arr, size);
     cout << "Отсортированный массив: ";
-    for (int i = 0; i < size; i++) {
+    Sort(arr, size);
+    for (int i = 0; i < size; ++i) {
         cout << arr[i] << " ";
     }
     cout << endl;
